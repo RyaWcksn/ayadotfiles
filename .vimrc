@@ -1,4 +1,6 @@
+filetype plugin indent on
 syntax on
+scriptencoding utf-8
 set splitbelow
 set noerrorbells
 set smartindent
@@ -19,41 +21,25 @@ set showtabline=2
 set number
 set title
 set scrolloff=5
-set expandtab
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-
-
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 
 call plug#begin()
-Plug 'preservim/NERDTree'
-Plug 'pangloss/vim-javascript'
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
-Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
-Plug 'jparise/vim-graphql'
+Plug 'rafi/awesome-vim-colorschemes'
+Plug 'fatih/vim-go'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'andreypopp/vim-colors-plain'
+Plug 'kiteco/vim-plugin'
+Plug 'preservim/NERDTree'
 Plug 'morhetz/gruvbox'
-let g:coc_global_extensions = [
-  \ 'coc-tsserver'
-  \ ]
-Plug 'flazz/vim-colorschemes'
 Plug 'ryanoasis/vim-devicons'
-Plug 'sainnhe/gruvbox-material'
-Plug 'ap/vim-css-color'
-Plug 'prettier/vim-prettier', { 'do': 'yarn install', 'branch': 'release/0.x' }
 Plug 'majutsushi/tagbar'
-Plug 'vim-airline/vim-airline'
-Plug 'dsznajder/vscode-es7-javascript-react-snippets'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+Plug 'ap/vim-css-color'
+Plug 'voldikss/vim-floaterm'
 call plug#end()
-colorscheme gruvbox
-set background=dark
-set number
-set tabstop=2
-set expandtab
+colorscheme termschool
+set background=light
 nmap <F8> :TagbarToggle<CR>
 map <space>nn :NERDTreeToggle<CR>
 map <space>nb :NERDTreeFromBookmark<CR>
@@ -85,25 +71,14 @@ map <space><down> <C-w>-
 map <space><left> <C-w><
 map <space><right> <C-w>>
 map <space>t :terminal<CR>
+map <space>tn :FloatermNew<CR>
+map <F12>  :FloatermHide<CR>
+map <space>tk :FloatermKill<CR>
+map <F9> :FloatermPrev<CR>
+map <F10> :FloatermNext<CR>
+map <F11> :FloatermShow<CR>
 
 let NERDTreeQuitOnOpen=1
-let mapleader = " "
-autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
-autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
-if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
-	let g:coc_global_extensions += ['coc-prettier']
-endif
-if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
-	let g:coc_global_extensions += ['coc-eslint']
-endif
-let g:coc_global_extensions = [
-    \ 'coc-tsserver',
-    \ 'coc-prettier',
-    \ 'coc-pairs',
-    \ 'coc-eslint',
-    \ 'coc-json',
-    \ 'coc-snippets',
-    \ ]
 inoremap <silent><expr> <TAB>
         \ pumvisible() ? "\<C-n>" :
         \ <SID>check_back_space() ? "\<TAB>" :
@@ -118,4 +93,32 @@ endfunction
 inoremap <silent><expr> <c-space> coc#refresh()
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
+" Go syntax highlighting
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_operators = 1
 
+" Auto formatting and importing
+let g:go_fmt_autosave = 1
+let g:go_fmt_command = "goimports"
+
+" Status line types/signatures
+let g:go_auto_type_info = 1
+
+" Run :GoBuild or :GoTestCompile based on the go file
+function! s:build_go_files()
+  let l:file = expand('%')
+  if l:file =~# '^\f\+_test\.go$'
+    call go#test#Test(0, 1)
+  elseif l:file =~# '^\f\+\.go$'
+    call go#cmd#Build(0)
+  endif
+endfunction
+
+" Map keys for most used commands.
+" Ex: `\b` for building, `\r` for running and `\b` for running test.
+autocmd FileType go nmap <space>b :<C-u>call <SID>build_go_files()<CR>
+autocmd FileType go nmap <space>r  <Plug>(go-run)
+autocmd FileType go nmap <space>t  <Plug>(go-test)
