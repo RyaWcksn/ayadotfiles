@@ -1,86 +1,127 @@
-URxvt.font:                     9x15,xft:DejaVu Sans Mono:autohint=true:size=12
-!URxvt.boldFont:                 9x15,xft:DejaVu Sans Mono:autohint=true:bold:size=12
-!URxvt.italicFont:               9x15,xft:DejaVu Sans Mono:autohint=true:italic:size=12
-!URxvt.boldItalicFont:           9x15,xft:DejaVu Sans Mono:autohint=true:bold:italic:size=12
+! DO NOT CHANGE THE ORDER
 
+! URXVT APPEARANCE
+!URxvt.font:                       xft:mplus Nerd Font Mono:size=11,xft:Monospace:size=11:antialias=true:hinting=true
+!URxvt.font: xft:Source Code Pro:style=Regular:size=10,xft:DejaVu Sans:size=8,xft:DejaVu Sans Mono for Powerline:pixelsize=11,xft:FantasqueSansMono-Regular:size=12,xft:Fira Code Retina:pixelsize=11,xft:Source Code Pro:size=10,xft:DejaVu Sans Mono:size=11,xft:Fira Code:size=10,xft:HanaMinA:size=12,xft:HanaMinB:size=12,xft:Source Code Pro for Powerline:pixelsize=22,xft:PowerlineSymbols,xft:Font Awesome,xft:DejaVu Sans Mono:size=11,
+URxvt.font:                 xft:Literation Mono Powerline:size=10:antialias=true:hinting=true,\
+                            xft:Noto Mono:size=10:antialias=true:hinting=true,\
+                            xft:Noto Color Emoji,\
+                           xft:Unifont,\
+                            9x15 
+URxvt.geometry:                   84x16
+URxvt.internalBorder:             0
+URxvt.cursorBlink:                true
+URxvt.cursorUnderline:            true
+URxvt.saveline:                   32768
+URxvt.scrollBar:                  false
+URxvt.scrollBar_right:            true
+URxvt.scrollBar_floating:         false
+URxvt.scrollstyle:                plain
+URxvt.urgentOnBell:               false
+URxvt.depth:                      32
+URxvt.iso14755:                   false
+URxvt.iconFile:                   /home/violet/.icons/gladient/term.png
+! Uncomment if to much font spacing
+URxvt.letterSpace: -1
 
-!- Font Render
-Xft.dpi:96
-Xft.antialiasing:false
-Xft.rgba:rgb
-Xft.hinting:true
-Xft.lcdfilter:lcddefault
+! URXVT EXTENSIONS
+URxvt.perl-ext-common:            default,tabbedex,url-select
+URxvt.keysym.Control-Shift-C:     eval:selection_to_clipboard
+URxvt.keysym.Control-Shift-V:     eval:paste_clipboard
+URxvt.keysym.Control-Up:          eval:scroll_up 1
+URxvt.keysym.Control-Down:        eval:scroll_down 1
+URxvt.keysym.Control-Home:        eval:scroll_to_top
+URxvt.keysym.Control-End:         eval:scroll_to_bottom
 
-*.cursorColor: #ebac54
+! TABBEDEX EXT
+URxvt.tabbedex.no-tabbedex-keys:  yes
+URxvt.tabbedex.new-button:        false
+URXvt.tabbedex.reopen-on-close:   yes
+URxvt.tabbedex.autohide:          yes
+URxvt.tabbedex.tabbar-fg:         5
+URxvt.tabbedex.tabbar-bg:         0
+URxvt.tabbedex.tab-fg:            10
+URxvt.tabbedex.tab-bg:            0
+URxvt.tabbedex.bell-fg:           0
+URxvt.tabbedex.bell-bg:           0
+URxvt.tabbedex.bell-tab-fg:       0
+URxvt.tabbedex.bell-tab-bg:       0
+URxvt.tabbedex.title-fg:          14
+URxvt.tabbedex.title-bg:          0
+URxvt.keysym.Control-Shift-T:     tabbedex:new_tab
+URxvt.keysym.Control-Shift-R:     tabbedex:rename_tab
+URxvt.keysym.Control-Shift-W:     tabbedex:kill_tab
+URxvt.keysym.Control-Next:        tabbedex:next_tab
+URxvt.keysym.Control-Prior:       tabbedex:prev_tab
+URxvt.keysym.Control-Shift-Next:  tabbedex:move_tab_right
+URxvt.keysym.Control-Shift-Prior: tabbedex:move_tab_left
 
-URxvt.foreground:           #c0b18b
-URxvt.background:           #2F2F2F
+! RESIZE FONT EXT
+URxvt.resize-font.step: 1
+URxvt.keysym.Control-minus:       resize-font:smaller
+URxvt.keysym.Control-plus:        resize-font:bigger
+URxvt.keysym.Control-equal:       resize-font:reset
+URxvt.keysym.Control-question:    resize-font:show
 
-URxvt.borderColor:          #2F2F2F
-URxvt.borderless:          true
-URxvt.internalBorder: 5
+! URL SELECT EXT
+URxvt.keysym.Control-Shift-U:     url-select:select_next
+URvxt.url-select.button:          2
+URxvt.url-select.launcher:        brave-bin
+URxvt.url-select.underline:       true
 
-URxvt.colorBD:              #ffffff
-URxvt.colorIT:              #a761c2
-URxvt.colorUL:              #6d9cbe
-URxvt.underlineColor:       #333333
-URxvt.highlightColor:       #ebac54
-URxvt.highlightTextColor:   #151515
+! COLOR SCHEME
+! black > red > green > yellow > blue > magenta > cyan > white
+#define black0                    [95]#373E4D
+#define black1                    #3B4252
+#define black2                    #434C5E
+#define black3                    #4C566A
+#define red0                      #FA5AA4
+#define red1                      #FA74B2
+#define green0                    #2BE491
+#define green1                    #44EB9F
+#define yellow0                   #FA946E
+#define yellow1                   #FAA687
+#define blue0                     #63C5EA
+#define blue1                     #7ACBEA
+#define magenta0                  #CF8EF4
+#define magenta1                  #D8A6F4
+#define cyan0                     #89CCF7
+#define cyan1                     #A1D5F7
+#define white0                    #F9F9F9
+#define white1                    #F7F7F7
+#define white2                    #F4F4F4
 
-URxvt.scrollstyle:plain
-URxvt.scrollBar:false
-URxvt.scrollTtyOutput:false
-URxvt.scrollWithBuffer:true
-URxvt.scrollTtyKeypress:true
+*.color1:                         red0
+*.color2:                         green0
+*.color3:                         yellow0
+*.color4:                         blue0
+*.color5:                         magenta0
+*.color6:                         cyan0
 
-URxvt.cursorColor:          #ebac54
-URxvt.cursorColor2:         #ebac54
-URxvt.cursorBlink:          true
-URxvt.cursorUnderline:      false
-URxvt.depth:24
+*.color9:                         red1
+*.color10:                        green1
+*.color11:                        yellow1
+*.color12:                        blue1
+*.color13:                        magenta1
+*.color14:                        cyan1
 
-!- Perl Extension
-URxvt.perl-ext-common:default,matcher,url-select,clipboard
-URxvt.url-launcher: ch  romium-browser
-URxvt.matcher.button:1
+! FOR REVERSING ONLY (INVERT BG/FG)
+*.foreground:                     white0
+*.background:                     black0
+*.cursorColor:                    white0
 
-!- Copy/paste
-URxvt.iso14755: False
-URxvt.keysym.Shift-Alt-C: perl:clipboard:copy
-URxvt.keysym.Shift-Alt-V: perl:clipboard:paste
+*.color0:                         black2
+*.color7:                         white1
 
-URxvt.underlineURLs:true
-URxvt.transparent:false
-URxvt.shading:30
-URxvt.geometry:72x24
+*.color8:                         black3
+*.color15:                        white2
 
-!-Urgent Terminal for Notification
-URxvt*urgentOnBell: true
+!*.foreground:                     black0
+!*.background:                     white0
+!*.cursorColor:                    black0
 
-    URxvt*visualBell:   false
+!*.color0:                         white1
+!*.color7:                         black2
 
-!- Color Scheme
-! Black
-*color0:      #202020
-*color8:      #606060
-! Red
-*color1:      #ff6565
-*color9:      #ff8d8d
-! Green
-*color2:      #93d44f
-*color10:     #c8e7a8
-! Yellow
-*color3:      #eab93d
-*color11:     #ffc123
-! Blue
-*color4:      #204a87
-*color12:     #3465a4
-! Mangenta
-*color5:      #ce5c00
-*color13:     #f57900
-! Cyan 
-*color6:      #89b6e2
-*color14:     #46a4ff
-! White
-*color7:      #cccccc
-*color15:     #ffffff
+!*.color8:                         white2
+!*.color15:                        black3

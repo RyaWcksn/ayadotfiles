@@ -1,6 +1,5 @@
 filetype plugin indent on
 syntax on
-scriptencoding utf-8
 set splitbelow
 set noerrorbells
 set smartindent
@@ -26,6 +25,17 @@ set softtabstop=2
 set shiftwidth=2
 
 call plug#begin()
+"Plug 'vimsence/vimsence'
+Plug 'phpactor/phpactor', {'do': 'composer install', 'for': 'php'}
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
+Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-path'
+Plug 'phpactor/ncm2-phpactor'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-projectionist'
+Plug 'noahfrederick/vim-composer'
+Plug 'noahfrederick/vim-laravel'
 Plug 'prettier/vim-prettier', {
   \ 'do': 'npm install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
@@ -47,8 +57,8 @@ Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
 Plug 'jparise/vim-graphql'        " GraphQL syntax
 Plug 'kchmck/vim-coffee-script'
 call plug#end()
-colorscheme PaperColor
-set background=light
+colorscheme nord
+set background=dark
 nmap <F8> :TagbarToggle<CR>
 map <space>nn :NERDTreeToggle<CR>
 map <space>nb :NERDTreeFromBookmark<CR>
@@ -134,4 +144,29 @@ autocmd FileType go nmap <space>t  <Plug>(go-test)
 nnoremap <silent> <space>d :<C-u>CocList diagnostics<cr>
 nmap <space>do <Plug>(coc-codeaction)
 nmap <space>rn <Plug>(coc-rename)
-
+let g:vimsence_client_id = '770987360972308500'
+let g:vimsence_small_text = 'NeoVim'
+let g:vimsence_small_image = 'neovim'
+let g:vimsence_editing_details = 'Editing: {}'
+let g:vimsence_editing_state = 'Working on: {}'
+let g:vimsence_file_explorer_text = 'In NERDTree'
+let g:vimsence_file_explorer_details = 'Looking for files'
+let g:vimsence_custom_icons = {'filetype': 'iconname'}
+" ncm2 configuration
+augroup ncm2
+  au!
+  autocmd BufEnter * call ncm2#enable_for_buffer()
+  au User Ncm2PopupOpen set completeopt=noinsert,menuone,noselect
+  au User Ncm2PopupClose set completeopt=menuone
+augroup END
+" enable ncm2 untuk semua buffec
+autocmd BufEnter * call ncm2#enable_for_buffer()
+" PENTING: :help Ncm2PopupOpen untuk informasi lebih lanjut
+"set completeopt=noinsert,menuone,noselect
+set shortmess+=c
+inoremap <c-c> <ESC>
+" Saat <Enter> ditekan ketika popup menu masih munculia akan menyembunykan menu. Gunakan mapping ini untuk menutup menu dan juga memulai baris baru.
+inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+" Use <TAB> to select the popup menu:
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
