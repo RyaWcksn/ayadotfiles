@@ -26,6 +26,9 @@ set shiftwidth=2
 
 call plug#begin()
 "Plug 'vimsence/vimsence'
+Plug 'arcticicestudio/nord-vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'phpactor/phpactor', {'do': 'composer install', 'for': 'php'}
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
@@ -170,3 +173,17 @@ inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 " Use <TAB> to select the popup menu:
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+let g:coc_global_extensions = [
+  \ 'coc-tsserver',
+	\	'coc-css',
+	\	'coc-eslint',
+	\	'coc-html',
+	\	'coc-phpls',
+	\	'coc-prettier',
+	\ 'coc-python',
+	\ 'coc-html'
+  \ ]
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
