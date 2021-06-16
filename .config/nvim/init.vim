@@ -26,7 +26,16 @@ set shiftwidth=2
 
 call plug#begin()
 "Plug 'vimsence/vimsence'
+Plug 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
+Plug 'mhinz/vim-startify'
+
+" Currently, es6 version of snippets is available in es6 branch only
+Plug 'letientai299/vim-react-snippets', { 'branch': 'es6' }
+Plug 'honza/vim-snippets'
+Plug 'digitaltoad/vim-jade'
 Plug 'arcticicestudio/nord-vim'
+Plug 'dNitro/vim-pug-complete', { 'for': ['jade', 'pug'] }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'phpactor/phpactor', {'do': 'composer install', 'for': 'php'}
@@ -60,7 +69,7 @@ Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
 Plug 'jparise/vim-graphql'        " GraphQL syntax
 Plug 'kchmck/vim-coffee-script'
 call plug#end()
-colorscheme nord
+colorscheme PaperColor
 set background=dark
 nmap <F8> :TagbarToggle<CR>
 map <space>nn :NERDTreeToggle<CR>
@@ -99,6 +108,7 @@ map <space>tk :FloatermKill<CR>
 map <F9> :FloatermPrev<CR>
 map <F10> :FloatermNext<CR>
 map <F11> :FloatermShow<CR>
+map <F5> :Startify<CR>
 
 let NERDTreeQuitOnOpen=1
 inoremap <silent><expr> <TAB>
@@ -187,3 +197,13 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:html5_event_handler_attributes_complete = 0 " Disable event-handler attributes
+let g:html5_rdfa_attributes_complete = 0          " Disable RDFa attributes
+let g:html5_microdata_attributes_complete = 0     " Disable microdata attributes
+let g:html5_aria_attributes_complete = 0          " Disable WAI-ARIA attribute
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
