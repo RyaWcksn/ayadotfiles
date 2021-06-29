@@ -28,11 +28,13 @@ call plug#begin()
 "Plug 'vimsence/vimsence'
 Plug 'SirVer/ultisnips'
 Plug 'SirVer/ultisnips'
+Plug 'alvan/vim-closetag'
 Plug 'mhinz/vim-startify'
 
 " Currently, es6 version of snippets is available in es6 branch only
 Plug 'letientai299/vim-react-snippets', { 'branch': 'es6' }
 Plug 'honza/vim-snippets'
+Plug 'mlaursen/vim-react-snippets'
 Plug 'digitaltoad/vim-jade'
 Plug 'arcticicestudio/nord-vim'
 Plug 'dNitro/vim-pug-complete', { 'for': ['jade', 'pug'] }
@@ -70,7 +72,7 @@ Plug 'jparise/vim-graphql'        " GraphQL syntax
 Plug 'kchmck/vim-coffee-script'
 call plug#end()
 colorscheme PaperColor
-set background=dark
+set background=light
 nmap <F8> :TagbarToggle<CR>
 map <space>nn :NERDTreeToggle<CR>
 map <space>nb :NERDTreeFromBookmark<CR>
@@ -109,6 +111,7 @@ map <F9> :FloatermPrev<CR>
 map <F10> :FloatermNext<CR>
 map <F11> :FloatermShow<CR>
 map <F5> :Startify<CR>
+map <F3> :source %<CR>
 
 let NERDTreeQuitOnOpen=1
 inoremap <silent><expr> <TAB>
@@ -166,17 +169,6 @@ let g:vimsence_file_explorer_text = 'In NERDTree'
 let g:vimsence_file_explorer_details = 'Looking for files'
 let g:vimsence_custom_icons = {'filetype': 'iconname'}
 " ncm2 configuration
-augroup ncm2
-  au!
-  autocmd BufEnter * call ncm2#enable_for_buffer()
-  au User Ncm2PopupOpen set completeopt=noinsert,menuone,noselect
-  au User Ncm2PopupClose set completeopt=menuone
-augroup END
-" enable ncm2 untuk semua buffec
-autocmd BufEnter * call ncm2#enable_for_buffer()
-" PENTING: :help Ncm2PopupOpen untuk informasi lebih lanjut
-"set completeopt=noinsert,menuone,noselect
-set shortmess+=c
 inoremap <c-c> <ESC>
 " Saat <Enter> ditekan ketika popup menu masih munculia akan menyembunykan menu. Gunakan mapping ini untuk menutup menu dan juga memulai baris baru.
 inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
@@ -191,7 +183,12 @@ let g:coc_global_extensions = [
 	\	'coc-phpls',
 	\	'coc-prettier',
 	\ 'coc-python',
-	\ 'coc-html'
+	\ 'coc-html',
+	\  'coc-stylelint',
+  \ 'coc-scssmodules',
+	\ 'coc-json',
+	\ 'coc-vimlsp',
+	\ 'coc-yaml'
   \ ]
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
@@ -201,9 +198,51 @@ let g:html5_event_handler_attributes_complete = 0 " Disable event-handler attrib
 let g:html5_rdfa_attributes_complete = 0          " Disable RDFa attributes
 let g:html5_microdata_attributes_complete = 0     " Disable microdata attributes
 let g:html5_aria_attributes_complete = 0          " Disable WAI-ARIA attribute
-let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
+" filenames like *.xml, *.html, *.xhtml, ...
+" These are the file extensions where this plugin is enabled.
+"
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
+
+" filenames like *.xml, *.xhtml, ...
+" This will make the list of non-closing tags self-closing in the specified files.
+"
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
+
+" filetypes like xml, html, xhtml, ...
+" These are the file types where this plugin is enabled.
+"
+let g:closetag_filetypes = 'html,xhtml,phtml'
+
+" filetypes like xml, xhtml, ...
+" This will make the list of non-closing tags self-closing in the specified files.
+"
+let g:closetag_xhtml_filetypes = 'xhtml,jsx'
+
+" integer value [0|1]
+" This will make the list of non-closing tags case-sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
+"
+let g:closetag_emptyTags_caseSensitive = 1
+
+" dict
+" Disables auto-close if not in a "valid" region (based on filetype)
+"
+let g:closetag_regions = {
+    \ 'typescript.tsx': 'jsxRegion,tsxRegion',
+    \ 'javascript.jsx': 'jsxRegion',
+    \ 'typescriptreact': 'jsxRegion,tsxRegion',
+    \ 'javascriptreact': 'jsxRegion',
+    \ }
+
+" Shortcut for closing tags, default is '>'
+"
+let g:closetag_shortcut = '>'
+
+" Add > at current position without closing the current tag, default is ''
+"
+let g:closetag_close_shortcut = '<leader>>'
+
